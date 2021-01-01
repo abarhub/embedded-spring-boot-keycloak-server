@@ -32,6 +32,7 @@
         <smallrye-metrics.version>2.3.3</smallrye-metrics.version> <!-- 2.4.0-2.4.2 causes compilation error with Java 11 on Maven -->
 
         <auto-service.version>1.0-rc7</auto-service.version>
+        <mysql-connector-java.version>8.0.22</mysql-connector-java.version>
     </properties>
 
     <modules>
@@ -225,10 +226,15 @@
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>com.h2database</groupId>-->
+<!--            <artifactId>h2</artifactId>-->
+<!--            &lt;!&ndash; <scope>test</scope> &ndash;&gt;-->
+<!--        </dependency>-->
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <!-- <scope>test</scope> -->
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-java.version}</version>
         </dependency>
 
         <dependency>
@@ -291,50 +297,4 @@
         </plugins>
     </build>
 
-    <profiles>
-        <profile>
-            <id>undertow</id>
-            <build>
-                <finalName>${project.artifactId}-undertow-${project.version}</finalName>
-            </build>
-            <dependencies>
-                <dependency>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-web</artifactId>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>org.springframework.boot</groupId>
-                            <artifactId>spring-boot-starter-tomcat</artifactId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-                <dependency>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-undertow</artifactId>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>jetty</id>
-            <build>
-                <finalName>${project.artifactId}-jetty-${project.version}</finalName>
-            </build>
-            <dependencies>
-                <dependency>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-web</artifactId>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>org.springframework.boot</groupId>
-                            <artifactId>spring-boot-starter-tomcat</artifactId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-                <dependency>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-jetty</artifactId>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
 </project>

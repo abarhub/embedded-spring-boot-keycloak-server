@@ -1,10 +1,13 @@
 spring:
   datasource:
-    username: sa
-    url: jdbc:h2:./data/keycloak;DB_CLOSE_ON_EXIT=FALSE
+    #username: sa
+    #url: jdbc:h2:./data/keycloak;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:mysql://localhost:3306/keycloak?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     hikari:
       maximum-pool-size: 25
       minimum-idle: 1
+    username: keycloak
+    password: keycloak
 
 server:
   forward-headers-strategy: native
@@ -23,14 +26,14 @@ logging:
     org.keycloak.services.managers.UserSessionManager: DEBUG
     org.keycloak.timer.basic: DEBUG
 
-#keycloak:
-#  custom:
+keycloak:
+  custom:
 #    server:
 #      keycloak-path: "/auth"
 #
-#    adminUser:
-#      username: admin
-#      password: admin
+    adminUser:
+      username: admin
+      password: admin
 #      create-admin-user-enabled: true
 #
 #    migration:
@@ -91,16 +94,16 @@ logging:
 #  connectionsHttpClient:
 #    default: {}
 #
-#  connectionsJpa:
-#    provider: "default"
-#    default:
-#      dataSource: "spring/datasource"
-#      initializeEmpty: true
-#      migrationStrategy: "update"
-#      showSql: false
-#      formatSql: true
-#      globalStatsInterval: -1
-#
+  connectionsJpa:
+    provider: "default"
+    default:
+      dataSource: "spring/datasource"
+      initializeEmpty: true
+      migrationStrategy: "update"
+      showSql: false
+      formatSql: true
+      globalStatsInterval: -1
+
 #  realmCache:
 #    default:
 #      enabled: true
